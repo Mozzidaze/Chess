@@ -26,12 +26,78 @@ class GameState():
         self.moveLog.append(move)  # log the move so we can undo it later
         self.whiteToMove = not self.whiteToMove # swap players
 
+    '''
+    undo the last move mode
+    '''
     def undoMove(self):
         if len(self.moveLog) != 0:
             move = self.moveLog.pop()
             self.board[move.startRow][move.startCol] = move.pieceMoved
             self.board[move.endRow][move.endCol] = move.pieceCaptured
             self.whiteToMove = not self.whiteToMove # swap players
+
+    '''
+    All moves considering checks
+    '''
+    def getValidMoves(self):
+        return self.getAllPossibleMoves()
+
+    def getAllPossibleMoves(self):
+        moves = []
+        for r in range(len(self.board)):
+            for c in range(len(self.board[r])):
+                turn = self.board[r][c][0]
+                if (turn == 'w' and self.whiteToMove) and (turn == 'b' and not self.whiteToMove):
+                    piece = self.board[r][c][1]
+                    if piece == 'P':
+                        self.getPawnMoves(r, c, moves)
+                    elif piece == 'R':
+                        self.getRookMoves(r, c, moves)
+                    elif piece == 'N':
+                        self.getKnightMoves(r, c, moves)
+                    elif piece == 'B':
+                        self.getBishopMoves(r, c, moves)
+                    elif piece == 'Q':
+                        self.getQueenMoves(r, c, moves)
+                    elif piece == 'K':
+                        self.getKingMoves(r, c, moves)
+
+    '''
+    get all the Pawn moves for the pawn located at row, col and addd these moves to the list
+    '''
+    def getPawnMoves(self):
+        pass
+
+    '''
+    get all the Pawn moves for the pawn located at row, col and addd these moves to the list
+    '''
+    def getRookMoves(self):
+        pass
+
+    '''
+    get all the Pawn moves for the pawn located at row, col and addd these moves to the list
+    '''
+    def getKnightMoves(self):
+        pass
+
+    '''
+    get all the Pawn moves for the pawn located at row, col and addd these moves to the list
+    '''
+    def getBishopMoves(self):
+        pass
+
+    '''
+    get all the Pawn moves for the pawn located at row, col and addd these moves to the list
+    '''
+    def getQueenMoves(self):
+        pass
+
+    '''
+    get all the Pawn moves for the pawn located at row, col and addd these moves to the list
+    '''
+    def getKingMoves(self):
+        pass
+
 
 class Move():
     # map keys to values
