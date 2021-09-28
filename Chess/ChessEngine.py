@@ -61,7 +61,7 @@ class GameState():
                         self.getQueenMoves(r, c, moves)
                     elif piece == 'K':
                         self.getKingMoves(r, c, moves)
-
+        return moves
     '''
     get all the Pawn moves for the pawn located at row, col and addd these moves to the list
     '''
