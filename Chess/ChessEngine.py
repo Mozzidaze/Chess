@@ -43,7 +43,7 @@ class GameState():
         return self.getAllPossibleMoves()
 
     def getAllPossibleMoves(self):
-        moves = []
+        moves = [Move((6, 4), (4, 4), self.board)]
         for r in range(len(self.board)):
             for c in range(len(self.board[r])):
                 turn = self.board[r][c][0]
@@ -116,6 +116,14 @@ class Move():
         self.endCol = endSq[1]
         self.pieceMoved = board[self.startRow][self.startCol]
         self.pieceCaptured = board[self.endRow][self.endCol]
+        self.moveID = self.startRow * 1000 + self.startCol * 100 + self.endRow * 10 + self.endCol
+        print(self.moveID)
+    '''
+    overriding the equals method
+    '''
+    def __eq__(self, other):
+        if isinstance(other, Move):
+            return self.moveID == other.moveID
 
     def getChessNotation(self):
         # can add more to make the chess notation more realistic
